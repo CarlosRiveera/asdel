@@ -9,6 +9,9 @@ header p{
 .menu {
   background-color: #002449;
 }
+.row-menu {
+  margin-left: 1em!important;
+}
 .logo {
   display: block;
   float: left;
@@ -19,12 +22,11 @@ header p{
 .nav-link {
   color: white!important;
 }
-
 .social-list-01 {
     padding: 0;
 }
 .social-list-01 {
-    padding: 12px 0;
+    padding-top: 1em;
     text-align: left;
 }
 .social-list-01 li {
@@ -35,13 +37,18 @@ header p{
 }
 .social-list-01 li a {
     display: block;
+    color: white!important;
+}
+.social-list-01 li a:hover {
+    display: block;
+    color: #045654!important;
 }
 .home-01 .social-list-01 li a i {
     color: #fff;
 }
 .contact-block-01 {
     float: right;
-    padding: 12px 15px;
+    padding: 1em;
 }
 .contact-block-01__email {
     font-size: 14px;
@@ -52,6 +59,9 @@ header p{
     vertical-align: middle;
     position: relative;
     padding-left: 26px;
+}
+.contact-block-01__email i:hover {
+    color: #045654!important;
 }
 .contact-block-01__phone {
     font-size: 14px;
@@ -65,7 +75,9 @@ header p{
     letter-spacing: 0.6px;
     margin: 0 0 0 37px;
 }
-
+.contact-block-01__phone i:hover {
+    color: #045654!important;
+}
 
 .carousel {
   margin-bottom: 5rem;
@@ -102,7 +114,9 @@ header p{
   margin-right: .75rem;
   margin-left: .75rem;
 }
-
+.container-services .col-lg-4 {
+  text-align: center;
+}
 
 /* Featurettes
 ------------------------- */
@@ -116,6 +130,11 @@ header p{
   font-weight: 300;
   line-height: 1;
   letter-spacing: -.05rem;
+}
+
+
+.nav-item {
+  padding-right: 1em;
 }
 
 
