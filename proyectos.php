@@ -86,7 +86,7 @@
                   <a class="nav-link" href="contact.html">Contacto</a>
                 </li>
                  <li class="nav-item">
-                  <a class="nav-link" href="concepts.html">Conceptos</a>
+                  <a class="nav-link" href="concepts.php">Conceptos</a>
                 </li>
                 <li>
                   <a class="nav-link" href="projects.html">Albúm de proyectos</a>

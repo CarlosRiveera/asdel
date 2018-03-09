@@ -59,6 +59,20 @@ CREATE TABLE `users` (
   `nickname` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+
+--
+-- Estructura de tabla para la tabla `proyectos`
+--
+
+DROP TABLE IF EXISTS `proyectos`;
+CREATE TABLE `proyectos` (
+  `idProyecto` int(11) NOT NULL,
+  `tituloProyecto` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `descripcionProyecto` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  `fechaInicio` date COLLATE utf8_unicode_ci NOT NULL,
+  `fechaFin` date COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 --
 -- Volcado de datos para la tabla `users`
 --
@@ -83,6 +97,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id_user`);
 
 --
+-- Indices de la tabla `proyectos`
+--
+ALTER TABLE `proyectos`
+  ADD PRIMARY KEY (`idProyecto`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -97,6 +117,13 @@ ALTER TABLE `conceptos`
 --
 ALTER TABLE `users`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
+
+--
+-- AUTO_INCREMENT de la tabla `proyectos`
+--
+ALTER TABLE `proyectos`
+  MODIFY `idProyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
