@@ -89,7 +89,7 @@
                   <a class="nav-link" href="concepts.php">Conceptos</a>
                 </li>
                 <li>
-                  <a class="nav-link" href="projects.html">Albúm de proyectos</a>
+                  <a class="nav-link" href="projects.php">Albúm de proyectos</a>
                 </li>
               </ul>
             </div>

@@ -17,13 +17,31 @@ if(@$_SESSION['id']!="")
 		</div>
 	</div>
 	<div class="container">
-		<div class="card" style="width: 33%;">
+		<div class="card" style="width: 33%;float:left">
 		  <div class="card-body">
 		    <h5 class="card-title">Conceptos</h5>
 		    <h6 class="card-subtitle mb-2 text-muted">Menu de Conceptos.</h6>
 		    <p class="card-text">Definir conceptos financieros y/o aclarar terminos.</p>
 		    <a class="btn btn-primary" href="wiki.php?action=0">Agregar</a>
 		    <a href="wiki.php?action=1" class="btn btn-success">Ver Existentes</a>
+		  </div>
+		</div>
+		<div class="card" style="width: 33%;float:left">
+		  <div class="card-body">
+		    <h5 class="card-title">Proyectos</h5>
+		    <h6 class="card-subtitle mb-2 text-muted">Menu de proyectos.</h6>
+		    <p class="card-text">Todos lo proyectos desarrollados por la empresa.</p>
+		    <a class="btn btn-primary" href="proyectos.php?action=0">Agregar</a>
+		    <a href="proyectos.php?action=1" class="btn btn-success">Ver Existentes</a>
+		  </div>
+		</div>
+		<div class="card" style="width: 33%;float:left">
+		  <div class="card-body">
+		    <h5 class="card-title">Noticias</h5>
+		    <h6 class="card-subtitle mb-2 text-muted">Menu de Noticias.</h6>
+		    <p class="card-text">Todos las noticias que crea que son importantes para sus lectores.</p>
+		    <a class="btn btn-primary" href="noticias.php?action=0">Agregar</a>
+		    <a href="noticias.php?action=1" class="btn btn-success">Ver Existentes</a>
 		  </div>
 		</div>
 	</div>

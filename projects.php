@@ -1,3 +1,44 @@
+<?php
+//Conectamos a la base de datos
+require('./back/conexion.php');
+
+//Evitamos que salgan errores por variables vacías
+error_reporting(E_ALL ^ E_NOTICE);
+
+//Cantidad de resultados por página (debe ser INT, no string/varchar)
+$cantidad_resultados_por_pagina = 3;
+
+//Comprueba si está seteado el GET de HTTP
+if (isset($_GET["pagina"])) {
+
+  //Si el GET de HTTP SÍ es una string / cadena, procede
+  if (is_string($_GET["pagina"])) {
+
+    //Si la string es numérica, define la variable 'pagina'
+     if (is_numeric($_GET["pagina"])) {
+
+       //Si la petición desde la paginación es la página uno
+       //en lugar de ir a 'index.php?pagina=1' se iría directamente a 'index.php'
+       if ($_GET["pagina"] == 1) {
+         header("Location: projects.php");
+         die();
+       } else { //Si la petición desde la paginación no es para ir a la pagina 1, va a la que sea
+         $pagina = $_GET["pagina"];
+      };
+
+     } else { //Si la string no es numérica, redirige al index (por ejemplo: index.php?pagina=AAA)
+       header("Location: index.html");
+      die();
+     };
+  };
+
+} else { //Si el GET de HTTP no está seteado, lleva a la primera página (puede ser cambiado al index.php o lo que sea)
+  $pagina = 1;
+};
+
+//Define el número 0 para empezar a paginar multiplicado por la cantidad de resultados por página
+$empezar_desde = ($pagina-1) * $cantidad_resultados_por_pagina;
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -87,7 +128,7 @@
                   <a class="nav-link" href="concepts.php">Conceptos</a>
                 </li>
                 <li>
-                  <a class="nav-link" href="projects.html">Albúm de proyectos</a>
+                  <a class="nav-link" href="projects.php">Albúm de proyectos</a>
                 </li>
               </ul>
             </div>
@@ -97,72 +138,66 @@
     </div>
     <div class="container cuerpo-web">
         <h3>Proyectos hechos por asdel</h3>
-          <!--First card section-->
-        <div class="card-group">
-          <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
+      <div class="row">
+                    <?php
+        //Obtiene TODO de la tabla
+        $consulta="SELECT * from proyectos";
+        $res=ejecutar($consulta);
+
+        //Cuenta el número total de registros
+        $total_registros = count($res);
+        if($total_registros>0){
+        //Obtiene el total de páginas existentes
+        $total_paginas = ceil($total_registros / $cantidad_resultados_por_pagina);
+
+        //Realiza la consulta en el orden de ID ascendente (cambiar "id" por, por ejemplo, "nombre" o "edad", alfabéticamente, etc.)
+        //Limitada por la cantidad de cantidad por página
+        $consulta_resultados =ejecutar("
+        SELECT * FROM proyectos
+        ORDER BY idProyecto ASC
+        LIMIT $empezar_desde, $cantidad_resultados_por_pagina");
+        //Crea un bluce 'while' y define a la variable 'datos' ($datos) como clave del array
+        //que mostrará los resultados por nombre
+          foreach ($consulta_resultados as $datos) {
+            //print_r ( $datos);
+?>
+
+          <div class="col-4 border text-center">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbsqtHFMyFJ2IH4G2GYMTiFCWTMR83ntDYYlUmxcSR1c4-F-4v" alt="Card image cap" class="rounded-circle center" style="width: 225px;height: auto;position: relative;margin-top: 10px">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <h5 class="card-title"><?php echo $datos['tituloProyecto']; ?></h5>
+              <p class="card-text">Descripcion: <?php echo $datos['descripcionProyecto']; ?></p>
             </div>
             <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
+              <small class="text-muted"><?php echo "Fecha de Inicio ".$datos['fechaInicio']." Fecha de Fin: ".$datos['fechaFin']; ?></small>
+            </div>
             </div>
           </div>
-          <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-          <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
-          <!--Second card section-->
-        <div class="card-group">
-          <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-          <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-          <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
+<?php
+
+}
+
+?>
+</div>
+<hr>
+
+<?php
+//Crea un bucle donde $i es igual 1, y hasta que $i sea menor o igual a X, a sumar (1, 2, 3, etc.)
+  //Nota: X = $total_paginas
+  for ($i=1; $i<=$total_paginas; $i++) {
+    //En el bucle, muestra la paginación
+    echo "<a href='projects.php?pagina=".$i."' class='btn btn-prymari'>".$i."</a>";
+  }
+}
+else{
+  ?>
+  <div class="jumbotron">
+          <h2 class="display-5">No existe ningun concepto</h2>
+
+  </div>
+<?php
+}
+?>
     </div>
 
       <!-- FOOTER -->
